@@ -1,15 +1,24 @@
+import cors from 'cors'
 import express from 'express'
 import { errorHandler } from './middlewares/errorHandler'
-import itemRoutes from './routes/itemRoutes'
+import { API_ROUTE, AUTH_ROUTE } from './routeConsts'
+import authRoutes from './routes/auth/authRoutes'
 
 const app = express()
+
+app.use(
+  cors({
+    origin: 'http://localhost:5173',
+    credentials: true
+  })
+)
 
 app.use(express.json())
 
 app.use(express.static('public'))
 
 // Routes
-app.use('/api/items', itemRoutes)
+app.use(API_ROUTE + AUTH_ROUTE, authRoutes)
 
 // Global error handler (should be after routes)
 app.use(errorHandler)
