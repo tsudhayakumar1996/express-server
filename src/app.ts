@@ -1,3 +1,4 @@
+import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import express from 'express'
 import { errorHandler } from './middlewares/errorHandler'
@@ -12,6 +13,8 @@ app.use(
     credentials: true
   })
 )
+
+app.use(cookieParser())
 
 app.use(express.json())
 
