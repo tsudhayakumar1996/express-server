@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from 'express'
-import type { Item } from '../models/item'
-import { items } from '../models/item'
+import type { Item } from '../models/item.js'
+import { items } from '../models/item.js'
 
 // Create an item
 export const createItem = (req: Request, res: Response, next: NextFunction) => {

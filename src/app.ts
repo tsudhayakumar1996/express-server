@@ -1,9 +1,10 @@
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import express from 'express'
-import { errorHandler } from './middlewares/errorHandler'
-import { API_ROUTE, AUTH_ROUTE } from './routeConsts'
-import authRoutes from './routes/auth/authRoutes'
+import path from 'path'
+import { errorHandler } from './middlewares/errorHandler.js'
+import { API_ROUTE, AUTH_ROUTE } from './routeConsts.js'
+import authRoutes from './routes/auth/authRoutes.js'
 
 const app = express()
 
@@ -14,16 +15,21 @@ app.use(
   })
 )
 
+// helpers
 app.use(cookieParser())
-
 app.use(express.json())
 
-app.use(express.static('public'))
+// static files serve
+const publicPath = path.join(process.cwd(), 'public')
+app.use(express.static(publicPath))
 
-// Routes
+// routes
 app.use(API_ROUTE + AUTH_ROUTE, authRoutes)
+app.get('/{*splat}', (req, res) => {
+  res.sendFile(path.join(publicPath, 'index.html'))
+})
 
-// Global error handler (should be after routes)
+// global error handler
 app.use(errorHandler)
 
 export default app
