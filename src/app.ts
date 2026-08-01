@@ -1,12 +1,16 @@
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
-import express from 'express'
-import path from 'path'
-import { errorHandler } from './middlewares/errorHandler.js'
-import { API_ROUTE, AUTH_ROUTE } from './routeConsts.js'
-import authRoutes from './routes/auth/authRoutes.js'
-import mongoose from 'mongoose'
 import dotenv from 'dotenv'
+import express from 'express'
+import mongoose from 'mongoose'
+import path from 'path'
+import { checkAuth } from './middlewares/authMiddleware.js'
+import { errorHandler } from './middlewares/errorHandler.js'
+import { AUTH_ROUTE } from './routes/auth/const/routeConsts.js'
+import authRoutes from './routes/auth/index.js'
+import { API_ROUTE } from './routes/const/routeConsts.js'
+import { HOME_ROOUTE } from './routes/home/const/routeConsts.js'
+import homeRoutes from './routes/home/index.js'
 
 dotenv.config()
 
@@ -36,8 +40,11 @@ mongoose
     throw new Error(err)
   })
 
-// Routes
+// api routes
 app.use(API_ROUTE + AUTH_ROUTE, authRoutes)
+app.use(API_ROUTE + HOME_ROOUTE, checkAuth, homeRoutes)
+
+// web app
 app.get('/{*splat}', (req, res) => {
   res.sendFile(path.join(publicPath, 'index.html'))
 })

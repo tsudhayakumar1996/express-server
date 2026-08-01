@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import { getTokenFrmCde } from '../../controllers/authController.js'
-import { GEN_TKN_FRM_CDE_ROUTE } from './routeConsts.js'
+import { GEN_TKN_FRM_CDE_ROUTE } from './const/routeConsts.js'
+import { getTokenFrmCde } from './controllers/authController.js'
 
 const router = Router()
 
