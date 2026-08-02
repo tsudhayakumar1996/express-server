@@ -1,3 +1,5 @@
 export const NOT_AUTHENTICATED = 'Not Authenticated'
 export const INTERNAL_SERVER_ERROR = 'Internal Server Error'
 export const ALREADY_EXISTS = 'already exists'
+export const LOG_OUT_SUCCESS = 'Logout Successfully'
+export const FCM_TKN_UPDTD_SUCCESS = 'FCM Tokens Updated Sucessfully'

@@ -8,7 +8,8 @@ import { checkAuth } from './middlewares/authMiddleware.js'
 import { errorHandler } from './middlewares/errorHandler.js'
 import { AUTH_ROUTE } from './routes/auth/const/routeConsts.js'
 import authRoutes from './routes/auth/index.js'
-import { API_ROUTE } from './routes/const/routeConsts.js'
+import { FCM_ROUTE } from './routes/fcm/const/routeConsts.js'
+import fcmRoutes from './routes/fcm/index.js'
 import { HOME_ROOUTE } from './routes/home/const/routeConsts.js'
 import homeRoutes from './routes/home/index.js'
 
@@ -41,8 +42,9 @@ mongoose
   })
 
 // api routes
-app.use(API_ROUTE + AUTH_ROUTE, authRoutes)
-app.use(API_ROUTE + HOME_ROOUTE, checkAuth, homeRoutes)
+app.use(AUTH_ROUTE, authRoutes)
+app.use(HOME_ROOUTE, checkAuth, homeRoutes)
+app.use(FCM_ROUTE, checkAuth, fcmRoutes)
 
 // web app
 app.get('/{*splat}', (req, res) => {

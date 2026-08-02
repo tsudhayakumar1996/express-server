@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { GET_LIST } from './const/routeConsts.js'
-import { getHome } from './controllers/authController.js'
+import { getHome } from './controllers/homeController.js'
 
 const router = Router()
 
