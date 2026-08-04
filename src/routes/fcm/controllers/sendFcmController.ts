@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express'
 import { FCM_TKN_UPDTD_SUCCESS } from '../../../const/infoMsgs.js'
 import User from '../../auth/schema/userSchema.js'
 
-export const updateFcmTkns = async (req: Request, res: Response, next: NextFunction) => {
+export const sendFcm = async (req: Request, res: Response, next: NextFunction) => {
   try {
     // fcm tkn from payload
     const fcmTkn = req.body.fcmTkn

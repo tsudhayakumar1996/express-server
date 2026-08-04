@@ -1,8 +1,10 @@
-import mongoose, { Document, Model } from 'mongoose'
+import type { ObjectId } from 'mongoose'
+import mongoose, { Model } from 'mongoose'
 import { USER_MODEL } from '../const/modelConsts.js'
 
 // the document shape
-interface IUser extends Document {
+export interface IUser {
+  _id: ObjectId
   name: string
   email: string
   profilePic: string
@@ -25,7 +27,7 @@ interface UpsertGoogleData {
 // the model shape (adds your static on top of the base Model)
 interface IUserModel extends Model<IUser> {
   upsertFromGoogle(data: UpsertGoogleData): Promise<IUser>
-  syncFcmToken(userId: string, token: string, platform: 'mobile' | 'web'): Promise<IUser>
+  syncFcmToken(userId: ObjectId, token: string, platform: 'mobile' | 'web'): Promise<IUser>
 }
 
 const userSchema = new mongoose.Schema<IUser, IUserModel>({
@@ -54,12 +56,12 @@ userSchema.statics.upsertFromGoogle = async function (data: UpsertGoogleData) {
   return this.findOneAndUpdate(
     { email: data.email },
     { $set: update, $setOnInsert: { email: data.email } },
-    { upsert: true, new: true, runValidators: true }
+    { upsert: true, returnDocument: 'after', runValidators: true }
   )
 }
 
 userSchema.statics.syncFcmToken = async function (userId: string, token: string, platform: 'mobile' | 'web') {
-  return this.findByIdAndUpdate(userId, { $set: { [`fcmTokens.${platform}`]: token } }, { new: true })
+  return this.findByIdAndUpdate(userId, { $set: { [`fcmTokens.${platform}`]: token } }, { returnDocument: 'after' })
 }
 
 const User = mongoose.model<IUser, IUserModel>(USER_MODEL, userSchema)

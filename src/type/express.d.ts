@@ -1,14 +1,11 @@
 // types/express.d.ts
 import 'express'
+import { User } from '../routes/auth/schema/userSchema.ts'
 
 declare global {
   namespace Express {
     interface Request {
-      user?: {
-        id: string
-        email: string
-        name: string
-      }
+      user?: User
     }
   }
 }

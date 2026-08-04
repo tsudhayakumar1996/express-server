@@ -6,12 +6,15 @@ import mongoose from 'mongoose'
 import path from 'path'
 import { checkAuth } from './middlewares/authMiddleware.js'
 import { errorHandler } from './middlewares/errorHandler.js'
+import { authRateLimitMiddleware, rateLimitMiddleware } from './middlewares/rateLimitMiddleWare.js'
 import { AUTH_ROUTE } from './routes/auth/const/routeConsts.js'
 import authRoutes from './routes/auth/index.js'
 import { FCM_ROUTE } from './routes/fcm/const/routeConsts.js'
 import fcmRoutes from './routes/fcm/index.js'
 import { HOME_ROOUTE } from './routes/home/const/routeConsts.js'
 import homeRoutes from './routes/home/index.js'
+import { ME } from './routes/me/const/routeConsts.js'
+import meRoutes from './routes/me/index.js'
 
 dotenv.config()
 
@@ -42,9 +45,10 @@ mongoose
   })
 
 // api routes
-app.use(AUTH_ROUTE, authRoutes)
-app.use(HOME_ROOUTE, checkAuth, homeRoutes)
-app.use(FCM_ROUTE, checkAuth, fcmRoutes)
+app.use(AUTH_ROUTE, authRateLimitMiddleware, authRoutes)
+app.use(HOME_ROOUTE, checkAuth, rateLimitMiddleware, homeRoutes)
+app.use(FCM_ROUTE, checkAuth, rateLimitMiddleware, fcmRoutes)
+app.use(ME, checkAuth, rateLimitMiddleware, meRoutes)
 
 // web app
 app.get('/{*splat}', (req, res) => {

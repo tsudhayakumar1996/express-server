@@ -3,6 +3,7 @@ import { NOT_AUTHENTICATED } from '../const/infoMsgs.js'
 import { createOAuthClient } from '../const/oAuthClient.js'
 import { createError } from '../helpers/createError.js'
 import { getUsrFrmIdTkn } from '../helpers/getUsrFrmIdTkn.js'
+import { getUsrToReq } from '../helpers/getUsrToReq.js'
 import { setAuthCookie } from '../helpers/setAuthCookie.js'
 import User from '../routes/auth/schema/userSchema.js'
 
@@ -19,10 +20,9 @@ export const checkAuth = async (req: Request, res: Response, next: NextFunction)
 
     // token expired
     const isExpired = new Date(user.tokenExpiredAt).getTime() < Date.now()
-
     // attach session in req obj
     if (!isExpired) {
-      req.user = { id: user._id.toString(), email: user.email, name: user.name }
+      req.user = getUsrToReq(user)
       return next()
     }
 
@@ -51,7 +51,7 @@ export const checkAuth = async (req: Request, res: Response, next: NextFunction)
 
     setAuthCookie(res, access_token!)
 
-    req.user = { id: updatedUser!._id.toString(), email: updatedUser!.email, name: updatedUser!.name }
+    req.user = getUsrToReq(updatedUser)
     next()
   } catch (error) {
     next(error)

@@ -11,7 +11,7 @@ export const getTokenFrmCde = async (req: Request, res: Response, next: NextFunc
     const { tokens } = await oAuthClient.getToken(code)
     const { email, name, profilePic } = getUsrFrmIdTkn(tokens.id_token!)
 
-    await User.upsertFromGoogle({
+    const user = await User.upsertFromGoogle({
       email,
       name,
       profilePic,
@@ -21,7 +21,7 @@ export const getTokenFrmCde = async (req: Request, res: Response, next: NextFunc
     })
 
     setAuthCookie(res, tokens.access_token!)
-    res.json({ expireOn: tokens.expiry_date })
+    res.json({ data: user })
   } catch (error) {
     next(error)
   }
