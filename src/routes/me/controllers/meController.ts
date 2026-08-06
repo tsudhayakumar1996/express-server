@@ -1,6 +1,4 @@
 import { NextFunction, Request, Response } from 'express'
-import { CONNECTION_VIOLATES } from '../../../const/infoMsgs.js'
-import { createError } from '../../../helpers/createError.js'
 import { IUser } from '../../auth/schema/userSchema.js'
 
 export const getMe = async (req: Request, res: Response, next: NextFunction) => {
@@ -14,7 +12,6 @@ export const getMe = async (req: Request, res: Response, next: NextFunction) => 
 
     // sending response
     res.json({ data: user })
-    next(createError(CONNECTION_VIOLATES, 409))
   } catch (error) {
     next(error)
   }

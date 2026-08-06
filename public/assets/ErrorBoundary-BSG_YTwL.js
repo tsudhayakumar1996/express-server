@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-DGeXAQPT.js";import{o as t}from"./chunk-4ZMWKKQ3-5SKig8dm.js";var n=e(),r=()=>{let e=t();return console.log(e,`error`),(0,n.jsx)(n.Fragment,{children:`An error occured`})};export{r as default};

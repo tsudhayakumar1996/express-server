@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-DGeXAQPT.js";var t=e(),n=()=>(0,t.jsxs)(t.Fragment,{children:[(0,t.jsx)(`div`,{children:`Home v4`}),(0,t.jsx)(`p`,{children:`This is the home screen to check...`})]});export{n as default};

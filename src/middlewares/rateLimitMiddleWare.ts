@@ -66,7 +66,6 @@ export async function rateLimitMiddleware(req: Request, res: Response, next: Nex
     } catch (_e) {
       // already banned, ignore
     }
-
     return res.status(429).json({ error: CONNECTION_VIOLATES })
   }
 }

@@ -1,0 +1,1 @@
+var e={LANDING:`/`,LOGIN:`/login`,PRIVATE_ROUTE:`/app`,LOGOUT:`/logout`,HIT_LIMIT:`/plswait`,PROFILE:`/app/profile`};export{e as t};

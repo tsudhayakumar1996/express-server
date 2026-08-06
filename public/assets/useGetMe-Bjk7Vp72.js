@@ -1,0 +1,1 @@
+import{t as e}from"./useQuery-L5PdGIZE.js";import{a as t,t as n}from"./fetch-Ddb-eenf.js";var r=()=>{let{data:r,isLoading:i,isError:a,error:o}=e({queryKey:[`meQry`],queryFn:()=>n(t,!0),staleTime:1/0});return{data:r,isLoading:i,isError:a,error:o}};export{r as t};

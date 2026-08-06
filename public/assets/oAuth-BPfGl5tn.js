@@ -1,0 +1,1 @@
+import{t as e}from"./jsx-runtime-DGeXAQPT.js";import{t}from"./index.esm-DReKvQPy.js";var n=e(),r=({children:e})=>(0,n.jsx)(t,{clientId:`258961358788-2mjaq601mqqcqrg0kmb4osdat39qa27i.apps.googleusercontent.com`,children:e});export{r as default};

@@ -1,0 +1,1 @@
+import{r as e,t}from"./jsx-runtime-DGeXAQPT.js";import{r as n}from"./index-CJf_zTDw.js";var r=e(n(),1),i=t(),a=r.createContext();function o({value:e,...t}){return(0,i.jsx)(a.Provider,{value:e??!0,...t})}var s=()=>r.useContext(a)??!1;export{s as n,o as t};
